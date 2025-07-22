@@ -26,7 +26,7 @@ A React-based dashboard that visualises GitHub repository data such as languages
 
 ## ⚙️ Demo
 
-![Screenshot of UI]( sss "GitHub Repo Dashboard")
+![Screenshot of UI](github-repo-dashboard/image.png "GitHub Repo Dashboard")
 
 ---
 
