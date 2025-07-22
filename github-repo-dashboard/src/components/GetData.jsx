@@ -66,7 +66,7 @@ function GetData() {
     <div className="info-wrapper">
   {repoData && (
     <div className="chart repo-data">
-      <RepoStats repo={repoData} />
+      <RepoStats repo={repoData} contributors={contributors}/>
     </div>
   )}
 
