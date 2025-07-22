@@ -11,16 +11,40 @@ function GetData() {
   const [languages, setLanguages] = useState({});
   const [commits, setCommits] = useState([]);
   const [contributors, setContributors] = useState([]);
-
+  const [owner, setOwner] = useState(""); 
+  const [repo, setRepo] = useState(""); 
+  const [error, setError] = useState(""); 
 
   const token = import.meta.env.VITE_GITHUB_TOKEN; // insert API token into .env file 
+
+  const validateURL = (url) => {
+    try {
+      const parsed = new URL(url.trim()); // make a url object 
+      if (parsed.hostname !== 'github.com') {
+        return false; // check hostname
+      }
+      const parts = parsed.pathname.split('/').filter(Boolean); // remove empty strings from the array 
+      if (parts.length === 2) {
+        const [owner, repo] = parts;
+        return { owner, repo };
+      }
+
+      return null;
+  } catch (err) {
+    return null;
+  }
+}
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const parts = repoUrl.split('/');
-    const owner = parts[parts.length - 2];
-    const repo = parts[parts.length - 1];
+    const result = validateURL(repoUrl);
+    if (!result) {
+      setError('Invalid GitHub repo URL');
+      return;
+    }
+    const { owner, repo } = result;
 
     try {
 
@@ -38,9 +62,9 @@ function GetData() {
       setLanguages(langRes.data);
       setCommits(commitRes.data);
       setContributors(contributors.data);
-
+      setError(""); 
     } catch (err) {
-      alert('Repo not found or token issue');
+      setError("Repo not found or token issue")
       console.error(err);
     }
   };
@@ -56,9 +80,12 @@ function GetData() {
           placeholder="Enter GitHub repo URL"
           value={repoUrl}
           onChange={(e) => setRepoUrl(e.target.value)}
+          required
         />
         <button>Analyse</button>
+        
       </form>
+      <div>{error}</div>
       </div>
             
       

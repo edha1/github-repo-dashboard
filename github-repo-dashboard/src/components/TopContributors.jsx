@@ -9,9 +9,9 @@ const TopContributors = ({ contributors }) => {
   return (
     <div>
         {topContributors.map(({ login, contributions}) => (
-          <div key={login}>
-            <p>{login}:  <span>{contributions} commits</span></p>
-          </div>
+          <span key={login}>
+            {login}:  <span>{contributions} commits</span>
+          </span>
         ))}
     </div>
   );
