@@ -1,6 +1,6 @@
 # 📈 GitHub Repo Dashboard
 
-A React-based dashboard that visualises **public** GitHub repository data such as languages used, commits made using Chart.js and the GitHub API. 
+A React-based dashboard that visualises **public** GitHub repository data such as languages used and commits made using Chart.js and the GitHub API.
 
 ---
 
